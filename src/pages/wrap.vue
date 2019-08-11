@@ -3,7 +3,7 @@
     <leftTime></leftTime>
     <van-steps
       description='today'
-      direction="vertical">
+      direction='vertical'>
       <van-step v-for='item in todayList' :key='item.sth'>
         <h3>{{item.time}}</h3>
         <p>{{item.sth}}</p>
@@ -13,18 +13,17 @@
 </template>
 <script>
 import leftTime from '../components/leftTime'
-import axios from "axios"
 export default {
   components: {
     leftTime
   },
   data() {
     return {
-      todayList: [{sth: 'todo1', time: 'am'},{sth: 'todo2', time: 'am'},{sth: 'todo3', time: 'am'}]
+      todayList: [{ sth: 'todo1', time: 'am' }, { sth: 'todo2', time: 'am' }, { sth: 'todo3', time: 'am' }]
     }
   }
 }
 </script>
-<style lang="less">
+<style lang='less'>
 
 </style>

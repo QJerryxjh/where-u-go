@@ -34,7 +34,7 @@ export default {
   computed: {
     noticeText() {
       return `客观：${Math.floor((this.objectiveTime - this.now) / 1000 / 60 / 60 / 24)}天；主观：${Math.floor((this.subjectiveTime - this.now) / 1000 / 60 / 60 / 24)}天`
-    },
+    }
   }
 }
 </script>

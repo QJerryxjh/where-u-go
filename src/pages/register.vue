@@ -43,18 +43,18 @@
   </div>
 </template>
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
   data() {
     return {
-      username: "",
-      password: "",
-      confirmPassword: "",
-      email: "",
-      name_error: "",
-      pwd_error: "",
-      email_error: ""
-    };
+      username: '',
+      password: '',
+      confirmPassword: '',
+      email: '',
+      name_error: '',
+      pwd_error: '',
+      email_error: ''
+    }
   },
   methods: {
     handleNameBlur() {},
@@ -62,44 +62,48 @@ export default {
     handleEmailBlur() {},
     handleSubmit() {
       if (this.username.length <= 0) {
-        this.name_error = "用户名不能为空";
-        return;
+        this.name_error = '用户名不能为空'
+        return
       } else {
-        this.name_error = "";
+        this.name_error = ''
       }
 
-      let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
       if (!reg.test(this.email)) {
-        this.email_error = "邮箱格式不合法";
-        return;
+        this.email_error = '邮箱格式不合法'
+        return
       } else {
-        this.email_error = "";
+        this.email_error = ''
       }
 
       if (this.password.length < 5) {
-        this.pwd_error = "密码长度不能少于5位";
-        return;
+        this.pwd_error = '密码长度不能少于5位'
+        return
       } else if (this.password !== this.confirmPassword) {
-        this.pwd_error = "两次输入密码不一致";
+        this.pwd_error = '两次输入密码不一致'
       } else {
-        this.pwd_error = "";
+        this.pwd_error = ''
       }
       axios
-        .post("http://localhost:3000/api/register", {
+        .post('http://localhost:3000/api/register', {
           user_name: this.username,
           user_email: this.email,
           user_pwd: this.password
+        }, {
+          headers: {
+            'X-token': '1111'
+          }
         })
         .then(res => {
           if (res.data.code === 200) {
-            this.$router.push({ path: "/login" });
+            this.$router.push({ path: '/login' })
           } else if (res.data.code === 401) {
-            console.log(res.data.msg);
+            console.log(res.data.msg)
           }
-        });
+        })
     }
   }
-};
+}
 </script>
 <style lang="less">
 .registerWrap {
