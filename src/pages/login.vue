@@ -28,6 +28,7 @@
 </template>
 <script>
 import axios from 'axios'
+import { setToken } from '../utils/token'
 export default {
   data() {
     return {
@@ -61,6 +62,7 @@ export default {
         .then(res => {
           const data = res.data
           if (data.code === 200) {
+            setToken(data.data.token)
             this.$router.push('/')
           } else if (data.code === 401) {
             this.email_error = data.msg

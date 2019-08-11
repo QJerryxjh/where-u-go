@@ -1,5 +1,4 @@
 import store from 'store'
-console.log(store)
 
 const TOKEN = 'token'
 
