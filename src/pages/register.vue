@@ -43,7 +43,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import { register } from '../api/user'
 export default {
   data() {
     return {
@@ -84,21 +84,16 @@ export default {
       } else {
         this.pwd_error = ''
       }
-      axios
-        .post('http://localhost:3000/api/register', {
-          user_name: this.username,
-          user_email: this.email,
-          user_pwd: this.password
-        }, {
-          headers: {
-            'X-token': '1111'
-          }
-        })
+      register({
+        user_name: this.username,
+        user_email: this.email,
+        user_pwd: this.password
+      })
         .then(res => {
           if (res.data.code === 200) {
             this.$router.push({ path: '/login' })
-          } else if (res.data.code === 401) {
-            console.log(res.data.msg)
+          } else if (res.data.code === 409) {
+            this.email_error = '该邮箱已被注册'
           }
         })
     }

@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import { login } from '../api/user'
 import { setToken } from '../utils/token'
 export default {
   data() {
@@ -54,11 +54,10 @@ export default {
         this.pwd_error = ''
       }
 
-      axios
-        .post('http://localhost:3000/api/login', {
-          user_email: this.email,
-          user_pwd: this.password
-        })
+      login({
+        user_email: this.email,
+        user_pwd: this.password
+      })
         .then(res => {
           const data = res.data
           if (data.code === 200) {
