@@ -60,7 +60,7 @@ export default {
     handleNameBlur() {},
     handlePwdBlur() {},
     handleEmailBlur() {},
-    handleSubmit() {
+    async handleSubmit() {
       if (this.username.length <= 0) {
         this.name_error = '用户名不能为空'
         return
@@ -84,18 +84,22 @@ export default {
       } else {
         this.pwd_error = ''
       }
-      register({
-        user_name: this.username,
-        user_email: this.email,
-        user_pwd: this.password
-      })
-        .then(res => {
-          if (res.data.code === 200) {
-            this.$router.push({ path: '/login' })
-          } else if (res.data.code === 409) {
-            this.email_error = '该邮箱已被注册'
-          }
+
+      try {
+        const res = await register({
+          user_name: this.username,
+          user_email: this.email,
+          user_pwd: this.password
         })
+
+        if (res.data.code === 200) {
+          this.$router.push({ path: '/login' })
+        } else if (res.data.code === 409) {
+          this.email_error = '该邮箱已被注册'
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }

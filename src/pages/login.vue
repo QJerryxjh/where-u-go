@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
       if (!reg.test(this.email)) {
         this.email_error = '邮箱格式不合法'
@@ -54,22 +54,22 @@ export default {
         this.pwd_error = ''
       }
 
-      login({
-        user_email: this.email,
-        user_pwd: this.password
-      })
-        .then(res => {
-          const data = res.data
-          if (data.code === 200) {
-            setToken(data.data.token)
-            this.$router.push('/')
-          } else if (data.code === 401) {
-            this.email_error = data.msg
-          }
+      try {
+        const res = await login({
+          user_email: this.email,
+          user_pwd: this.password
         })
-        .catch(err => {
-          console.log(err)
-        })
+
+        const data = res.data
+        if (data.code === 200) {
+          setToken(data.data.token)
+          this.$router.push('/')
+        } else if (data.code === 401) {
+          this.email_error = data.msg
+        }
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 }
