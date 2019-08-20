@@ -1,14 +1,13 @@
 import vuex from 'vuex'
 import vue from 'vue'
+import { user } from './user'
 
 vue.use(vuex)
 
 const store = new vuex.Store({
-  state: {
-    name: 'qje'
+  modules: {
+    user
   },
-  mutations: {},
-  actions: {},
   strict: process.env.NODE_ENV !== 'production'
 })
 

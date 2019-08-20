@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getToken } from './token'
+import store from '../store'
 
 const service = axios.create({
   baseURL: 'http://localhost:3000/api',
@@ -10,7 +10,7 @@ const service = axios.create({
 })
 
 service.interceptors.request.use(config => {
-  const token = getToken()
+  const token = store.state.user.token
 
   if (token) {
     config.headers['X-token'] = token

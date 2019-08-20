@@ -28,7 +28,6 @@
 </template>
 <script>
 import { login } from '../api/user'
-import { setToken } from '../utils/token'
 export default {
   data() {
     return {
@@ -62,7 +61,7 @@ export default {
 
         const data = res.data
         if (data.code === 200) {
-          setToken(data.data.token)
+          this.$store.dispatch('user/login', { token: data.data.token })
           this.$router.push('/')
         } else if (data.code === 401) {
           this.email_error = data.msg
