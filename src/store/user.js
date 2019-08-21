@@ -1,7 +1,6 @@
 import { setToken, getToken } from '../utils/token'
 
 export const user = {
-  namespaced: true,
   state: {
     token: getToken()
   },

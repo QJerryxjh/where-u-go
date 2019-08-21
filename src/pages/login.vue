@@ -61,7 +61,7 @@ export default {
 
         const data = res.data
         if (data.code === 200) {
-          this.$store.dispatch('user/login', { token: data.data.token })
+          this.$store.dispatch('login', { token: data.data.token })
           this.$router.push('/')
         } else if (data.code === 401) {
           this.email_error = data.msg
