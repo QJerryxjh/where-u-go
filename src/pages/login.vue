@@ -61,10 +61,11 @@ export default {
 
         const data = res.data
         if (data.code === 200) {
+          this.$toast.success('登录成功')
           this.$store.dispatch('login', { token: data.data.token })
           this.$router.push('/')
         } else if (data.code === 401) {
-          this.email_error = data.msg
+          this.$toast.fail(data.msg)
         }
       } catch (e) {
         console.log(e)

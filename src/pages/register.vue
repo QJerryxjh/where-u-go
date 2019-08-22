@@ -93,9 +93,12 @@ export default {
         })
 
         if (res.data.code === 200) {
+          this.$toast.success('注册成功')
           this.$router.push({ path: '/login' })
         } else if (res.data.code === 409) {
-          this.email_error = '该邮箱已被注册'
+          this.$toast.fail('该邮箱已被注册')
+        } else {
+          this.$toast.fail(res.data.msg)
         }
       } catch (e) {
         console.log(e)

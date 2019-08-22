@@ -1,4 +1,4 @@
-import { setToken, getToken } from '../utils/token'
+import { setToken, getToken, removeToken } from '../utils/token'
 
 export const user = {
   state: {
@@ -8,11 +8,18 @@ export const user = {
     login(state, token) {
       state.token = token
       setToken(token)
+    },
+    removeToken(state) {
+      state.token = ''
+      removeToken()
     }
   },
   actions: {
     login({ commit }, { token }) {
       commit('login', token)
+    },
+    removeToken({ commit }) {
+      commit('removeToken')
     }
   }
 }
