@@ -5,11 +5,17 @@
 </template>
 
 <script>
+import { checkToken } from './api/user'
 
 export default {
   name: 'app',
-  components: {
-
+  async mounted() {
+    try {
+      await checkToken()
+    } catch (err) {
+      console.log(err)
+      this.$toast.fail('登录状态失效，请重新')
+    }
   }
 }
 </script>
