@@ -6,7 +6,7 @@
       :text="noticeText"
     />
     <div class='tipInfo'>
-      <Progress :progressLeft='Math.floor((this.subjectiveTime - this.now) / 1000 / 60 / 60 / 24)'></Progress>
+      <Progress :progressLeft='Math.floor((this.bestTime - this.now) / 1000 / 60 / 60 / 24)'></Progress>
       <weather></weather>
     </div>
   </div>
@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       now: new Date().getTime(),
-      subjectiveTime: new Date('2019/10/20'),
+      subjectiveTime: new Date('2019/10/13'),
+      bestTime: new Date('2019/10/26'),
       objectiveTime: new Date('2019/8/31')
     }
   },

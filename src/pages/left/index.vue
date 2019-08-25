@@ -12,7 +12,7 @@
   </div>
 </template>
 <script>
-import leftTime from '../components/leftTime'
+import leftTime from './components/leftTime'
 export default {
   components: {
     leftTime
