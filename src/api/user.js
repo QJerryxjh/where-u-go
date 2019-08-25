@@ -7,3 +7,7 @@ export const login = (params) => {
 export const register = (params) => {
   return post('/register', params)
 }
+
+export const resetPwd = (params) => {
+  return post('/resetPwd', params)
+}

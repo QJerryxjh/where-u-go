@@ -8,6 +8,7 @@
         label="用户名"
         placeholder="请输入用户名"
         :error-message="name_error"
+        @keydown.enter="handleSubmit"
       />
 
       <van-field
@@ -16,6 +17,7 @@
         label="邮箱"
         placeholder="请输入邮箱"
         :error-message="email_error"
+        @keydown.enter="handleSubmit"
       />
 
       <van-field
@@ -25,6 +27,7 @@
         placeholder="请输入密码"
         required
         :error-message="pwd_error"
+        @keydown.enter="handleSubmit"
       />
       <van-field
         v-model="confirmPassword"
@@ -32,14 +35,16 @@
         label="确认密码"
         placeholder="请输入密码"
         required
+        @keydown.enter="handleSubmit"
       />
     </van-cell-group>
     <van-button
       type="info"
       size="large"
-      style="margin-top: 20px;"
+      style="margin: 20px 0 5px;"
       @click="handleSubmit"
     >注册</van-button>
+    <van-button to='/login' size='large' plain type="default">去登录</van-button>
   </div>
 </template>
 <script>
@@ -101,6 +106,7 @@ export default {
           this.$toast.fail(res.data.msg)
         }
       } catch (e) {
+        this.$toast.fail('注册失败')
         console.log(e)
       }
     }

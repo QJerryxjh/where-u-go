@@ -1,6 +1,6 @@
 <template>
-  <div class='loginWrap'>
-    <h1 class='loginTitle'>登录</h1>
+  <div class='resetPwdWrap'>
+    <h1 class='resetPwdTitle'>更改密码</h1>
     <van-cell-group>
       <van-field
         v-model='email'
@@ -13,7 +13,7 @@
       <van-field
         v-model='password'
         type='password'
-        label='密码'
+        label='新密码'
         placeholder='请输入密码'
         required
         :error-message='pwd_error'
@@ -25,13 +25,14 @@
       size='large'
       style='margin: 20px 0 5px;'
       @click='handleSubmit'
-    >登录</van-button>
-    <van-button to='/register' size='large' plain type="default">去注册</van-button>
-    <div class='resetPwd'><router-link to='resetPwd'>忘记密码？</router-link></div>
+    >确认更改</van-button>
+    <van-button to='/login' size='large' plain type="default">去登录</van-button>
   </div>
 </template>
+
 <script>
-import { login } from '../api/user'
+import { resetPwd } from '../api/user'
+
 export default {
   data() {
     return {
@@ -52,46 +53,39 @@ export default {
       }
 
       if (this.password.length < 5) {
-        this.pwd_error = '密码错误'
+        this.pwd_error = '密码长度不能少于5位'
         return
       } else {
         this.pwd_error = ''
       }
 
       try {
-        const res = await login({
+        const res = await resetPwd({
           user_email: this.email,
           user_pwd: this.password
         })
 
         const data = res.data
         if (data.code === 200) {
-          this.$toast.success('登录成功')
-          this.$store.dispatch('login', { token: data.data.token })
-          this.$router.push('/')
+          this.$toast.success('更改密码成功')
+          this.$router.push('/login')
         } else if (data.code === 401) {
           this.$toast.fail(data.msg)
         }
       } catch (e) {
-        this.$toast.fail('登录失败')
+        this.$toast.fail('更改失败')
         console.log(e)
       }
     }
   }
 }
 </script>
+
 <style lang='less'>
-.loginWrap {
-  padding: 0 24px;
-  .loginTitle {
-    text-align: center;
-  }
-  .resetPwd {
-    text-align: right;
-    font-size: 16px;
-    a {
-      color: #1E90FF;
+  .resetPwdWrap {
+    padding: 0 24px;
+    .resetPwdTitle, .resetPwdTip {
+      text-align: center;
     }
   }
-}
 </style>
