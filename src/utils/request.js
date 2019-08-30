@@ -4,7 +4,7 @@ import router from '../router'
 import { Toast } from 'vant'
 
 const service = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://106.14.3.24:9090/api',
   timeout: 1000 * 60,
   validateStatus(status) {
     return (status >= 200 && status <= 300) || status === 304
