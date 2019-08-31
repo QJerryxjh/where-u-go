@@ -11,7 +11,7 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/home/index'
     },
     {
       path: '/register',
