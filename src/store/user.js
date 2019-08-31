@@ -13,8 +13,9 @@ export const user = {
       state.token = ''
       removeToken()
     },
-    setNewToken(state, token) {
+    setNewToken(state, { token, user_email }) {
       state.token = token
+      state.user_email = user_email
       setToken(token)
     }
   },
@@ -25,8 +26,8 @@ export const user = {
     removeToken({ commit }) {
       commit('removeToken')
     },
-    setNewToken({ commit }, { token }) {
-      commit('setNewToken', token)
+    setNewToken({ commit }, { token, user_email }) {
+      commit('setNewToken', { token, user_email })
     }
   }
 }

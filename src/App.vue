@@ -13,7 +13,7 @@ export default {
     try {
       const res = await checkToken()
       if (res.data.code === 200) {
-        this.$store.dispatch('setNewToken', { token: res.data.token })
+        this.$store.dispatch('setNewToken', { token: res.data.token, user_email: res.data.user_email })
       }
       console.log(res.data.token)
     } catch (err) {
