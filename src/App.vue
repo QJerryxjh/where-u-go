@@ -11,10 +11,16 @@ export default {
   name: 'app',
   async mounted() {
     try {
-      await checkToken()
+      const res = await checkToken()
+      if (res.data.code === 200) {
+        this.$store.dispatch('setNewToken', { token: res.data.token })
+      }
+      console.log(res.data.token)
     } catch (err) {
       console.log(err)
+      this.$router.push('/login')
       this.$toast.fail('登录状态失效，请重新')
+      this.$$store.dispatch('removeToken')
     }
   }
 }
