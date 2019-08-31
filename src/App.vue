@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view v-if='!loadUserInfo'></router-view>
   </div>
 </template>
 
@@ -9,19 +9,31 @@ import { checkToken } from '@api/user'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      loadUserInfo: true
+    }
+  },
   async mounted() {
     try {
       const res = await checkToken()
       if (res.data.code === 200) {
-        this.$store.dispatch('setNewToken', { token: res.data.token, user_email: res.data.user_email })
+        const { user_email, user_name, user_avatar, user_gender, token } = res.data
+        this.$store.dispatch('setNewToken', {
+          token,
+          user_email,
+          user_name,
+          user_avatar,
+          user_gender
+        })
       }
-      console.log(res.data.token)
     } catch (err) {
       console.log(err)
       this.$router.push('/login')
       this.$toast.fail('登录状态失效，请重新')
       this.$$store.dispatch('removeToken')
     }
+    this.loadUserInfo = false
   }
 }
 </script>

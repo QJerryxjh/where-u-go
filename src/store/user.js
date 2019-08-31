@@ -13,10 +13,9 @@ export const user = {
       state.token = ''
       removeToken()
     },
-    setNewToken(state, { token, user_email }) {
-      state.token = token
-      state.user_email = user_email
-      setToken(token)
+    setNewToken(state, userInfo) {
+      Object.assign(state, userInfo)
+      setToken(userInfo.token)
     }
   },
   actions: {
@@ -26,8 +25,8 @@ export const user = {
     removeToken({ commit }) {
       commit('removeToken')
     },
-    setNewToken({ commit }, { token, user_email }) {
-      commit('setNewToken', { token, user_email })
+    setNewToken({ commit }, userInfo) {
+      commit('setNewToken', userInfo)
     }
   }
 }

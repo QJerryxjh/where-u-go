@@ -1,33 +1,36 @@
 <template>
   <router-link to='/login'>
     <div class='userInfoShow'>
-      <div class='userName'>{{ user.name }}</div>
+      <div class='userName'>{{ name }}</div>
       <div class='idWrap'>
-        <div class='id'>ID:{{ user.id }}</div>
+        <div class='id'>ID:{{ id }}</div>
         <div class="genderAndAge">
-          <i class='iconfont' style='float: left;'>{{ user.gender === 'female' ? '&#xe891;' : user.gender === 'male' ? '&#xe77d;' : '&#xe613;' }}</i>
-          <span>{{ user.age + '岁' }}</span>
+          <i class='iconfont' style='float: left; margin-right: 5px'>{{ gender === 'female' ? '&#xe891;' : gender === 'male' ? '&#xe77d;' : '&#xe613;' }}</i>
+          <span>{{ age === undefined ? '年龄未知' : age + '岁' }}</span>
         </div>
       </div>
       <div class="personalHomePage">
         <span class='personal'>个人主页</span><i class='iconfont'>&#xe625;</i>
       </div>
-      <img src="@assets/images/avatar.jpeg" class="avatar">
+      <img v-if='avatar === "default"' src="@assets/images/avatar.jpeg" class="avatar">
+      <img v-else :src="avatar" class="avatar">
     </div>
   </router-link>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data() {
-    return {
-      user: {
-        name: 'Wwwwwwwwwwwwwwwwwwwwwwwwwww',
-        id: 'Ww2ww.com',
-        age: '22'
-      }
-    }
-  }
+    return {}
+  },
+  computed: mapState({
+    name: state => state.user.user_name,
+    id: state => state.user.user_email,
+    gender: state => state.user.user_gender,
+    age: state => state.user.user_age,
+    avatar: state => state.user.user_avatar
+  })
 }
 </script>
 
