@@ -12,7 +12,7 @@
       <div class="personalHomePage">
         <span class='personal'>个人主页</span><i class='iconfont'>&#xe625;</i>
       </div>
-      <img src="../../../../assets/images/avatar.jpeg" class="avatar">
+      <img src="@assets/images/avatar.jpeg" class="avatar">
     </div>
   </router-link>
 </template>

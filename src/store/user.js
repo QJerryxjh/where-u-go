@@ -1,4 +1,4 @@
-import { setToken, getToken, removeToken } from '../utils/token'
+import { setToken, getToken, removeToken } from '@utils/token'
 
 export const user = {
   state: {

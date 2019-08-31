@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { resetPwd } from '../../api/user'
+import { resetPwd } from '@api/user'
 
 export default {
   data() {

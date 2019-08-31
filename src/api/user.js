@@ -1,4 +1,4 @@
-import { post, get } from '../utils/request'
+import { post, get } from '@utils/request'
 
 export const login = (params) => {
   return post('/login', params)

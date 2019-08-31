@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { checkToken } from './api/user'
+import { checkToken } from '@api/user'
 
 export default {
   name: 'app',

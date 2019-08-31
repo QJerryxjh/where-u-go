@@ -1,8 +1,8 @@
 import vue from 'vue'
 import Router from 'vue-router'
-import register from '../pages/userState/register'
-import login from '../pages/userState/login'
-import resetPwd from '../pages/userState/resetPwd'
+import register from '@pages/userState/register'
+import login from '@pages/userState/login'
+import resetPwd from '@pages/userState/resetPwd'
 import home from './home'
 
 vue.use(Router)
