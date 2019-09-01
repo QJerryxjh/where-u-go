@@ -18,13 +18,14 @@ export default {
     try {
       const res = await checkToken()
       if (res.data.code === 200) {
-        const { user_email, user_name, user_avatar, user_gender, token } = res.data
+        const { user_email, user_name, user_avatar, user_gender, user_age, token } = res.data
         this.$store.dispatch('setNewToken', {
           token,
           user_email,
           user_name,
           user_avatar,
-          user_gender
+          user_gender,
+          user_age
         })
       }
     } catch (err) {
@@ -42,5 +43,6 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;;
 }
 </style>

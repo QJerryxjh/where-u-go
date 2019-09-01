@@ -16,6 +16,17 @@ export const user = {
     setNewToken(state, userInfo) {
       Object.assign(state, userInfo)
       setToken(userInfo.token)
+    },
+    logout(state) {
+      Object.assign(state, {
+        token: '',
+        user_name: '',
+        user_email: '',
+        user_gender: '',
+        user_avatar: '',
+        user_age: ''
+      })
+      removeToken()
     }
   },
   actions: {
@@ -27,6 +38,9 @@ export const user = {
     },
     setNewToken({ commit }, userInfo) {
       commit('setNewToken', userInfo)
+    },
+    logout({ commit }) {
+      commit('logout')
     }
   }
 }

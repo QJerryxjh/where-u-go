@@ -73,7 +73,8 @@ export default {
             user_email: data.data.user_email,
             user_name: data.data.user_name,
             user_avatar: data.data.user_avatar,
-            user_gender: data.data.user_gender
+            user_gender: data.data.user_gender,
+            user_age: data.data.user_age
           })
           this.$router.push('/')
         } else if (data.code === 401) {
