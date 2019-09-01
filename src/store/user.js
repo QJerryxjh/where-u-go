@@ -5,9 +5,9 @@ export const user = {
     token: getToken()
   },
   mutations: {
-    login(state, token) {
-      state.token = token
-      setToken(token)
+    login(state, userInfo) {
+      Object.assign(state, userInfo)
+      setToken(userInfo.token)
     },
     removeToken(state) {
       state.token = ''
@@ -19,8 +19,8 @@ export const user = {
     }
   },
   actions: {
-    login({ commit }, { token }) {
-      commit('login', token)
+    login({ commit }, userInfo) {
+      commit('login', userInfo)
     },
     removeToken({ commit }) {
       commit('removeToken')
