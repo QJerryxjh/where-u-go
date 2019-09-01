@@ -32,6 +32,7 @@
 </template>
 <script>
 import { login } from '@api/user'
+
 export default {
   data() {
     return {
@@ -67,7 +68,13 @@ export default {
         const data = res.data
         if (data.code === 200) {
           this.$toast.success('登录成功')
-          this.$store.dispatch('login', { token: data.data.token })
+          this.$store.dispatch('login', {
+            token: data.data.token,
+            user_email: data.data.user_email,
+            user_name: data.data.user_name,
+            user_avatar: data.data.user_avatar,
+            user_gender: data.data.user_gender
+          })
           this.$router.push('/')
         } else if (data.code === 401) {
           this.$toast.fail(data.msg)
