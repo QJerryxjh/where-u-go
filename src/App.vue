@@ -30,8 +30,7 @@ export default {
     } catch (err) {
       console.log(err)
       this.$router.push('/login')
-      this.$toast.fail('登录状态失效，请重新')
-      this.$$store.dispatch('removeToken')
+      this.$store.dispatch('removeToken')
     }
     this.loadUserInfo = false
   }
