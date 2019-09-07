@@ -11,6 +11,23 @@
         @keydown.enter="handleSubmit"
       />
       <van-field
+        v-model="emailCode"
+        required
+        label="邮箱验证码"
+        placeholder="请输入验证码"
+        :error-message="emailCode_error"
+        @keydown.enter="handleSubmit"
+      >
+        <van-button
+          @click='handleEmailCode'
+          :disabled="disabled"
+          slot="button"
+          size="small"
+          type="primary">
+          {{ this.codeBtn }}
+        </van-button>
+      </van-field>
+      <van-field
         v-model='password'
         type='password'
         label='新密码'
@@ -31,18 +48,36 @@
 </template>
 
 <script>
-import { resetPwd } from '@api/user'
+import { resetPwd, getEmailCode } from '@api/user'
 
 export default {
   data() {
     return {
       email: '',
       password: '',
+      pwd_error: '',
       email_error: '',
-      pwd_error: ''
+      emailCode_error: '',
+      codeBtn: '发送验证码',
+      disabled: false
     }
   },
   methods: {
+    async handleEmailCode() {
+      const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
+      if (!reg.test(this.email)) {
+        this.email_error = '邮箱格式不合法'
+        return
+      } else {
+        this.email_error = ''
+      }
+
+      this.codeBtn = '已发送'
+      this.disabled = true
+
+      const res = await getEmailCode({ user_email: this.email })
+      console.log(res)
+    },
     async handleSubmit() {
       const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
       if (!reg.test(this.email)) {
@@ -59,10 +94,16 @@ export default {
         this.pwd_error = ''
       }
 
+      if (this.emailCode === '') {
+        this.emailCode_error = '验证码为空'
+        return
+      }
+
       try {
         const res = await resetPwd({
           user_email: this.email,
-          user_pwd: this.password
+          user_pwd: this.password,
+          user_emailCode: this.emailCode
         })
 
         const data = res.data

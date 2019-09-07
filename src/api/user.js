@@ -15,3 +15,7 @@ export const resetPwd = (params) => {
 export const checkToken = () => {
   return get('/checkToken')
 }
+
+export const getEmailCode = (params) => {
+  return post('/getEmailCode', params)
+}
