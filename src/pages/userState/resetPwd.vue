@@ -57,13 +57,14 @@ export default {
       password: '',
       pwd_error: '',
       email_error: '',
+      emailCode: '',
       emailCode_error: '',
       codeBtn: '发送验证码',
       disabled: false
     }
   },
   methods: {
-    async handleEmailCode() {
+    handleEmailCode() {
       const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
       if (!reg.test(this.email)) {
         this.email_error = '邮箱格式不合法'
@@ -75,8 +76,7 @@ export default {
       this.codeBtn = '已发送'
       this.disabled = true
 
-      const res = await getEmailCode({ user_email: this.email })
-      console.log(res)
+      getEmailCode({ user_email: this.email })
     },
     async handleSubmit() {
       const reg = /^([a-zA-Z]|[0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/
@@ -110,7 +110,7 @@ export default {
         if (data.code === 200) {
           this.$toast.success('更改密码成功')
           this.$router.push('/login')
-        } else if (data.code === 401) {
+        } else if (data.code === 401 || data.code === 409) {
           this.$toast.fail(data.msg)
         }
       } catch (e) {

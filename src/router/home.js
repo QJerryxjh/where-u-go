@@ -1,6 +1,7 @@
 import home from '@pages/home'
 import left from '@pages/left'
 import myInfo from '@pages/home/myInfo'
+import friends from '@pages/home/friends'
 
 export default {
   path: '/home',
@@ -15,6 +16,11 @@ export default {
       path: 'myInfo',
       name: 'myInfo',
       component: myInfo
+    },
+    {
+      path: 'friends',
+      name: 'friends',
+      component: friends
     }
   ]
 }
